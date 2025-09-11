@@ -1,32 +1,48 @@
+/* Reset & base styles */
 body {
-  font-family: 'Segoe UI', sans-serif;
-  background: linear-gradient(to right, #1c92d2, #f2fcfe);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100vh;
   margin: 0;
+  padding: 0;
+  font-family: 'Segoe UI', sans-serif;
+  background: linear-gradient(135deg, #1f1c2c, #928dab);
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .container {
   background: white;
   padding: 2rem;
-  border-radius: 15px;
-  box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+  border-radius: 20px;
   width: 90%;
-  max-width: 600px;
+  max-width: 500px;
+  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+  animation: floatIn 1s ease-out;
+}
+
+.title {
+  text-align: center;
+  font-size: 2rem;
+  color: #333;
+  margin-bottom: 20px;
+  animation: fadeIn 1s ease-in;
 }
 
 textarea {
   width: 100%;
-  height: 120px;
-  margin-top: 10px;
-  margin-bottom: 10px;
-  padding: 10px;
-  border-radius: 10px;
+  padding: 15px;
+  border-radius: 12px;
   border: 1px solid #ccc;
   font-size: 16px;
-  resize: vertical;
+  resize: none;
+  margin-bottom: 15px;
+  transition: all 0.3s ease;
+}
+
+textarea:focus {
+  border-color: #7f5af0;
+  box-shadow: 0 0 5px rgba(127, 90, 240, 0.5);
+  outline: none;
 }
 
 .buttons {
@@ -35,15 +51,54 @@ textarea {
 }
 
 button {
-  background-color: #1c92d2;
-  border: none;
+  flex: 1;
+  margin: 0 5px;
+  background: #7f5af0;
   color: white;
-  padding: 10px 20px;
-  border-radius: 8px;
+  border: none;
+  padding: 12px 20px;
+  border-radius: 10px;
   font-size: 16px;
   cursor: pointer;
+  transition: transform 0.2s ease;
 }
 
 button:hover {
-  background-color: #156ba3;
+  background: #6245e0;
+  transform: scale(1.05);
+}
+
+#outputBox {
+  margin-top: 20px;
+  padding: 15px;
+  background: #f3f3f3;
+  border-radius: 12px;
+  text-align: center;
+  font-size: 18px;
+  color: #333;
+  min-height: 50px;
+  animation: fadeIn 1.2s ease-in-out;
+}
+
+/* Animations */
+@keyframes floatIn {
+  0% {
+    transform: translateY(30px);
+    opacity: 0;
+  }
+  100% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: scale(0.98);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
 }
