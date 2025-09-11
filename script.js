@@ -12,7 +12,7 @@ for (const key in informalToFormal) {
   formalToInformal[informalToFormal[key]] = key;
 }
 
-function translate(mode) {
+function doTranslate(mode) {
   const inputRaw = document.getElementById('inputText').value.trim().toLowerCase();
   const output = document.getElementById('output');
 
@@ -40,6 +40,6 @@ function translate(mode) {
 }
 
 document.addEventListener('DOMContentLoaded', function () {
-  document.getElementById('toFormalBtn').addEventListener('click', () => translate('formal'));
-  document.getElementById('toInformalBtn').addEventListener('click', () => translate('informal'));
+  document.getElementById('toFormalBtn').addEventListener('click', () => doTranslate('formal'));
+  document.getElementById('toInformalBtn').addEventListener('click', () => doTranslate('informal'));
 });
