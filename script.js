@@ -17,12 +17,12 @@ function translate(mode) {
   const output = document.getElementById('output');
 
   if (inputRaw === '') {
-    output.textContent = "Please enter a greeting or 'list'.";
+    output.textContent = "Result: Please enter a greeting or 'list'.";
     return;
   }
 
   if (inputRaw === 'list') {
-    let listText = 'INFORMAL ↔ FORMAL\n\n';
+    let listText = 'Result:\n\nINFORMAL ↔ FORMAL\n\n';
     for (const informal in informalToFormal) {
       listText += informal + " ↔ " + informalToFormal[informal] + "\n";
     }
@@ -30,14 +30,16 @@ function translate(mode) {
     return;
   }
 
-  let dictionary = mode === 'formal' ? informalToFormal : formalToInformal;
+  const dictionary = mode === 'formal' ? informalToFormal : formalToInformal;
 
-  if (inputRaw in dictionary) {
-    output.textContent = dictionary[inputRaw];
+  if (dictionary[inputRaw]) {
+    output.textContent = "Result: " + dictionary[inputRaw];
   } else {
-    output.textContent = "ERROR: Greeting not recognized!";
+    output.textContent = "Result: ERROR — Greeting not recognized!";
   }
 }
 
-document.getElementById('toFormalBtn').addEventListener('click', () => translate('formal'));
-document.getElementById('toInformalBtn').addEventListener('click', () => translate('informal'));
+document.addEventListener('DOMContentLoaded', function () {
+  document.getElementById('toFormalBtn').addEventListener('click', () => translate('formal'));
+  document.getElementById('toInformalBtn').addEventListener('click', () => translate('informal'));
+});
