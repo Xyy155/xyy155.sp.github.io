@@ -15,7 +15,6 @@ const formalToInformal = Object.fromEntries(
   Object.entries(informalToFormal).map(([k, v]) => [v, k])
 );
 
-// Levenshtein Distance
 function levenshtein(a, b) {
   const matrix = Array.from({ length: a.length + 1 }, () =>
     Array(b.length + 1).fill(0)
@@ -53,10 +52,14 @@ function autoCorrect(word, dict) {
 function translate(mode) {
   const input = document.getElementById('inputText').value.trim().toLowerCase();
   const output = document.getElementById('outputText');
+  const popup = document.getElementById('listPopup');
 
   if (input === "list") {
     showWordList();
+    output.textContent = "";
     return;
+  } else {
+    closePopup();
   }
 
   const dict = mode === "formal" ? informalToFormal : formalToInformal;
@@ -73,11 +76,26 @@ function translate(mode) {
   }
 }
 
-// Show popup list
 function showWordList() {
   const popup = document.getElementById('listPopup');
   const popupContent = document.getElementById('popupContent');
   popupContent.innerHTML = "";
 
   Object.entries(informalToFormal).forEach(([informal, formal]) => {
-    const row = document.createElement
+    const row = document.createElement("div");
+    const informalDiv = document.createElement("div");
+    informalDiv.textContent = informal;
+    const formalDiv = document.createElement("div");
+    formalDiv.textContent = formal;
+    row.appendChild(informalDiv);
+    row.appendChild(formalDiv);
+    popupContent.appendChild(row);
+  });
+
+  popup.classList.remove("hidden");
+}
+
+function closePopup() {
+  const popup = document.getElementById('listPopup');
+  popup.classList.add("hidden");
+}
