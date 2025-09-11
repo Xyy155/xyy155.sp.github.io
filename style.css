@@ -1,43 +1,48 @@
-const informalToFormal = {
-  "hi": "hello",
-  "hey": "greetings",
-  "bye": "goodbye",
-  "byee": "goodbye",
-  "cya": "see you later",
-  "yo": "good afternoon"
-};
-
-const formalToInformal = {};
-for (const key in informalToFormal) {
-  formalToInformal[informalToFormal[key]] = key;
+body {
+  font-family: Arial, sans-serif;
+  padding: 20px;
+  max-width: 600px;
+  margin: auto;
+  background: #f4f6f9;
 }
 
-function translate(mode) {
-  const inputRaw = document.getElementById('inputText').value.trim().toLowerCase();
-  const output = document.getElementById('output');
-
-  if (inputRaw === '') {
-    output.textContent = "Please enter a greeting or 'list'.";
-    return;
-  }
-
-  if (inputRaw === 'list') {
-    let listText = 'INFORMAL ↔ FORMAL\n\n';
-    for (const informal in informalToFormal) {
-      listText += informal + " ↔ " + informalToFormal[informal] + "\n";
-    }
-    output.textContent = listText;
-    return;
-  }
-
-  let dictionary = mode === 'formal' ? informalToFormal : formalToInformal;
-
-  if (inputRaw in dictionary) {
-    output.textContent = dictionary[inputRaw];
-  } else {
-    output.textContent = "ERROR: Greeting not recognized!";
-  }
+h1 {
+  text-align: center;
+  margin-bottom: 20px;
+  font-size: 2em;
 }
 
-document.getElementById('toFormalBtn').addEventListener('click', () => translate('formal'));
-document.getElementById('toInformalBtn').addEventListener('click', () => translate('informal'));
+textarea {
+  width: 100%;
+  height: 60px;
+  font-size: 16px;
+  padding: 10px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+}
+
+button {
+  margin: 10px 10px 0 0;
+  padding: 10px 20px;
+  font-size: 16px;
+  background-color: #4a90e2;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: #357ABD;
+}
+
+#output {
+  margin-top: 20px;
+  font-weight: bold;
+  white-space: pre-wrap;
+  font-size: 18px;
+  padding: 10px;
+  border-radius: 6px;
+  background-color: #ffffff;
+  border: 1px solid #ccc;
+}
