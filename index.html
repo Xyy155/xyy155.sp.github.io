@@ -4,7 +4,56 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>IF-F Translator</title>
-  <link rel="stylesheet" href="style.css" />
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      padding: 20px;
+      max-width: 600px;
+      margin: auto;
+      background: #f4f6f9;
+    }
+
+    h1 {
+      text-align: center;
+      margin-bottom: 20px;
+      font-size: 2em;
+    }
+
+    textarea {
+      width: 100%;
+      height: 60px;
+      font-size: 16px;
+      padding: 10px;
+      border-radius: 8px;
+      border: 1px solid #ccc;
+    }
+
+    button {
+      margin: 10px 10px 0 0;
+      padding: 10px 20px;
+      font-size: 16px;
+      background-color: #4a90e2;
+      color: white;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background-color: #357ABD;
+    }
+
+    #output {
+      margin-top: 20px;
+      font-weight: bold;
+      white-space: pre-wrap;
+      font-size: 18px;
+      padding: 10px;
+      border-radius: 6px;
+      background-color: #ffffff;
+      border: 1px solid #ccc;
+    }
+  </style>
 </head>
 <body>
   <h1>IF-F Translator</h1>
@@ -13,6 +62,57 @@
   <button id="toInformalBtn">To Informal</button>
   <div id="output">Result:</div>
 
-  <script src="script.js"></script>
+  <script>
+    const informalToFormal = {
+      "hi": "hello",
+      "hey": "greetings",
+      "bye": "goodbye",
+      "byee": "goodbye",
+      "cya": "see you later",
+      "yo": "good afternoon"
+    };
+
+    const formalToInformal = {};
+    for (const key in informalToFormal) {
+      formalToInformal[informalToFormal[key]] = key;
+    }
+
+    function runTranslation(mode) {
+      const inputRaw = document.getElementById('inputText').value.trim().toLowerCase();
+      const output = document.getElementById('output');
+
+      if (inputRaw === '') {
+        output.textContent = "Result: Please enter a greeting or 'list'.";
+        return;
+      }
+
+      if (inputRaw === 'list') {
+        let listText = 'Result:\n\nINFORMAL ↔ FORMAL\n\n';
+        for (const informal in informalToFormal) {
+          listText += informal + " ↔ " + informalToFormal[informal] + "\n";
+        }
+        output.textContent = listText;
+        return;
+      }
+
+      const dictionary = mode === 'formal' ? informalToFormal : formalToInformal;
+
+      if (dictionary[inputRaw]) {
+        output.textContent = "Result: " + dictionary[inputRaw];
+      } else {
+        output.textContent = "Result: ERROR — Greeting not recognized!";
+      }
+    }
+
+    document.addEventListener('DOMContentLoaded', function () {
+      document.getElementById('toFormalBtn').addEventListener('click', function () {
+        runTranslation('formal');
+      });
+
+      document.getElementById('toInformalBtn').addEventListener('click', function () {
+        runTranslation('informal');
+      });
+    });
+  </script>
 </body>
 </html>
