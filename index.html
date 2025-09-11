@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Text Style Translator</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="container">
+    <h1>Text Style Translator</h1>
+    <textarea id="inputText" placeholder="Enter your text here..."></textarea>
+
+    <div class="buttons">
+      <button onclick="translateText('formal')">To Formal</button>
+      <button onclick="translateText('informal')">To Informal</button>
+    </div>
+
+    <textarea id="outputText" placeholder="Translated text will appear here..." readonly></textarea>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
