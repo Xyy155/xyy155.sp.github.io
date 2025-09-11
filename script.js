@@ -15,12 +15,11 @@ const formalToInformal = Object.fromEntries(
   Object.entries(informalToFormal).map(([k, v]) => [v, k])
 );
 
-// Levenshtein Distance function
+// Levenshtein Distance
 function levenshtein(a, b) {
   const matrix = Array.from({ length: a.length + 1 }, () =>
     Array(b.length + 1).fill(0)
   );
-
   for (let i = 0; i <= a.length; i++) matrix[i][0] = i;
   for (let j = 0; j <= b.length; j++) matrix[0][j] = j;
 
@@ -35,15 +34,12 @@ function levenshtein(a, b) {
           );
     }
   }
-
   return matrix[a.length][b.length];
 }
 
-// Try to correct small typos in greetings
 function autoCorrect(word, dict) {
   let closest = null;
   let minDist = Infinity;
-
   for (const key of Object.keys(dict)) {
     const dist = levenshtein(word, key);
     if (dist < minDist && dist <= 2) {
@@ -51,7 +47,6 @@ function autoCorrect(word, dict) {
       closest = key;
     }
   }
-
   return closest;
 }
 
@@ -59,9 +54,12 @@ function translate(mode) {
   const input = document.getElementById('inputText').value.trim().toLowerCase();
   const output = document.getElementById('outputText');
 
-  let dict = mode === "formal" ? informalToFormal : formalToInformal;
+  if (input === "list") {
+    showWordList();
+    return;
+  }
 
-  // Direct match or auto-corrected
+  const dict = mode === "formal" ? informalToFormal : formalToInformal;
   let corrected = input in dict ? input : autoCorrect(input, dict);
 
   if (corrected && dict[corrected]) {
@@ -74,3 +72,12 @@ function translate(mode) {
     output.textContent = "❌ ERROR: Greeting not recognized!";
   }
 }
+
+// Show popup list
+function showWordList() {
+  const popup = document.getElementById('listPopup');
+  const popupContent = document.getElementById('popupContent');
+  popupContent.innerHTML = "";
+
+  Object.entries(informalToFormal).forEach(([informal, formal]) => {
+    const row = document.createElement
