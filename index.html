@@ -3,20 +3,23 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Text Style Translator</title>
+  <title>Formalizer</title>
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
   <div class="container">
-    <h1>Text Style Translator</h1>
-    <textarea id="inputText" placeholder="Enter your text here..."></textarea>
+    <h1 class="title">Text Style Translator</h1>
+
+    <textarea id="inputText" placeholder="Enter informal or formal word..."></textarea>
 
     <div class="buttons">
-      <button onclick="translateText('formal')">To Formal</button>
-      <button onclick="translateText('informal')">To Informal</button>
+      <button onclick="translate('formal')">To Formal</button>
+      <button onclick="translate('informal')">To Informal</button>
     </div>
 
-    <textarea id="outputText" placeholder="Translated text will appear here..." readonly></textarea>
+    <div id="outputBox">
+      <p id="outputText">Translation will appear here.</p>
+    </div>
   </div>
 
   <script src="script.js"></script>
