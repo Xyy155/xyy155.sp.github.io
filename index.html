@@ -1,36 +1,30 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>IF-F</title>
-  <link rel="stylesheet" href="style.css" />
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>IF-F</title>
+<link rel="stylesheet" href="style.css" />
 </head>
 <body>
   <div class="container">
     <h1 class="title">IF-F</h1>
-
     <textarea id="inputText" placeholder="Enter informal or formal word or type list to show it."></textarea>
-
     <div class="buttons">
       <button onclick="translate('formal')">To Formal</button>
       <button onclick="translate('informal')">To Informal</button>
     </div>
-
     <div id="outputBox">
       <p id="outputText">Translation will appear here.</p>
     </div>
   </div>
 
-  <!-- List Popup Window -->
   <div id="listPopup" class="popup hidden">
     <div class="popup-header">
       <span class="popup-title"><span class="informal-header">INFORMAL</span> ↔ <span class="formal-header">FORMAL</span></span>
       <button class="close-btn" onclick="closePopup()">✕</button>
     </div>
-    <div class="popup-content" id="popupContent">
-      <!-- Word list will be injected here -->
-    </div>
+    <div class="popup-content" id="popupContent"></div>
   </div>
 
   <script src="script.js"></script>
